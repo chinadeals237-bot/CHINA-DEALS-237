@@ -1,15 +1,12 @@
+# codemagic.yaml
 workflows:
-  build_app:
-    name: CHINA DEALS Build
+  android-release:
+    name: Build Android APK
     environment:
       flutter: stable
-      xcode: latest
     scripts:
-      - name: Get dependencies
-        script: flutter pub get
-      - name: Build Android
-        script: flutter build apk
-       --release --no-codesign
+      - flutter clean
+      - flutter pub get
+      - flutter build apk --release
     artifacts:
       - build/app/outputs/flutter-apk/app-release.apk
-      
