@@ -1,27 +1,20 @@
-
-id("com.android.application")id("com.google.gms.google-services")implementation(platform("com.google.firebase:firebase-bom:34.0.0"))implementation("com.google.firebase:firebase-analytics")
-// Fichier android/app/build.gradle
-
-apply plugin: 'com.android.application'
-apply plugin: 'com.google.gms.google-services' //
-
 android {
-    namespace 'chinadeals.app'
-    compileSdk 34
+    namespace "chinadeals.app"
+    compileSdkVersion 34
 
     defaultConfig {
         applicationId "chinadeals.app"
-        minSdk 21
-        targetSdk 34
+        minSdkVersion 21
+        targetSdkVersion 34
         versionCode 1
         versionName "1.0"
-
         multiDexEnabled true
     }
 
     buildTypes {
         release {
             minifyEnabled false
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -32,10 +25,10 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = '17'
+        jvmTarget = "17"
     }
 }
 
 dependencies {
-    implementation 'com.google.firebase:firebase-analytics'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.0"
 }
