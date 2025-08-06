@@ -1,0 +1,16 @@
+workflows:
+  build_china_deals:
+    name: Build CHINA DEALS App
+    max_build_duration: 30
+    environment:
+      flutter: stable
+      xcode: latest
+    scripts:
+      - name: Installer les dépendances Flutter
+        script: |
+          flutter pub get
+      - name: Compiler Android APK
+        script: |
+          flutter build apk --release
+    artifacts:
+      - build/app/outputs/flutter-apk/app-release.apk
