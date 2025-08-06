@@ -1,30 +1,49 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'auth/login.dart';
-import 'home/dashboard.dart';
-import 'firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'screens/login_page.dart';
+import 'screens/home_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  runApp(const ChinaDealsApp());
+  await Firebase.initializeApp();
+  runApp(const MyApp());
 }
 
-class ChinaDealsApp extends StatelessWidget {
-  const ChinaDealsApp({super.key});
-
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'CHINA DEALS',
-      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
-        fontFamily: 'Roboto',
+        primarySwatch: Colors.orange,
+        useMaterial3: true,
       ),
-      home: const LoginPage(),
+      home: const RootApp(),
+    );
+  }
+}
+
+class RootApp extends StatelessWidget {
+  const RootApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<User?>(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          );
+        }
+        if (snapshot.hasData) {
+          return const HomePage();
+        } else {
+          return const LoginPage();
+        }
+      },
     );
   }
 }
