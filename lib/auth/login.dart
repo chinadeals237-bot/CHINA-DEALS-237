@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../home/dashboard.dart';
-import 'register.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -13,66 +11,55 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  bool loading = false;
-  String error = '';
+  bool isLoading = false;
+  String errorMessage = '';
 
-  Future<void> login() async {
+  Future<void> signIn() async {
     setState(() {
-      loading = true;
-      error = '';
+      isLoading = true;
+      errorMessage = '';
     });
+
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailController.text.trim(),
-        password: passwordController.text.trim(),
+        password: passwordController.text,
       );
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const DashboardPage()),
-      );
-    } on FirebaseAuthException catch (e) {
+    } catch (e) {
       setState(() {
-        error = e.message ?? 'Erreur de connexion';
-      });
-    } finally {
-      setState(() {
-        loading = false;
+        errorMessage = 'Échec de connexion. Vérifie ton email ou mot de passe.';
       });
     }
+
+    setState(() => isLoading = false);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Connexion')),
+      appBar: AppBar(title: const Text('Connexion - CHINA DEALS')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
+            Image.asset('assets/logo.png', height: 100),
             TextField(
               controller: emailController,
-              decoration: const InputDecoration(labelText: 'Email'),
+              decoration: const InputDecoration(labelText: 'Adresse e-mail'),
             ),
             TextField(
               controller: passwordController,
               decoration: const InputDecoration(labelText: 'Mot de passe'),
               obscureText: true,
             ),
-            const SizedBox(height: 20),
-            if (error.isNotEmpty)
-              Text(error, style: const TextStyle(color: Colors.red)),
+            const SizedBox(height: 16),
+            if (errorMessage.isNotEmpty)
+              Text(errorMessage, style: const TextStyle(color: Colors.red)),
             ElevatedButton(
-              onPressed: login,
-              child: loading
+              onPressed: isLoading ? null : signIn,
+              child: isLoading
                   ? const CircularProgressIndicator()
                   : const Text('Se connecter'),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (_) => const RegisterPage()));
-              },
-              child: const Text('Créer un compte'),
             ),
           ],
         ),
