@@ -1,4 +1,4 @@
-package com.example.china_deals
+package chinadeals.app
 
 import io.flutter.embedding.android.FlutterActivity
 
