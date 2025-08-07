@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'pages/login_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,10 +15,24 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'CHINA DEALS',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.red,
+      theme: ThemeData(primarySwatch: Colors.green),
+      home: const HomePage(),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Accueil - CHINA DEALS'),
       ),
-      home: const LoginPage(),
+      body: const Center(
+        child: Text('Bienvenue dans votre application de gestion de ventes !'),
+      ),
     );
   }
 }
