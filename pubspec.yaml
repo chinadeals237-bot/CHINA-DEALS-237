@@ -1,6 +1,5 @@
 name: china_deals
-description: Application de gestion des tâches journalières pour employés.
-
+description: Application mobile de gestion de ventes (CHINA DEALS)
 publish_to: "none"
 
 version: 1.0.0+1
