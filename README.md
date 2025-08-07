@@ -1,2 +1,2 @@
-# CHINA-DEALS-237
+# CHINA DEALS 237
 Application mobile CHINA DEALS 
