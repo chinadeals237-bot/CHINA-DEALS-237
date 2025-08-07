@@ -1,4 +1,4 @@
-defaultConfig {
+defaultConfig {minSdkVersion 19
     applicationId "chinadeals.app"
     minSdkVersion 21
     targetSdkVersion 34
