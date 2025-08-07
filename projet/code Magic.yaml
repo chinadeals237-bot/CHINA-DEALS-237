@@ -1,12 +1,12 @@
-# codemagic.yaml
 workflows:
-  android-release:
-    name: Build Android APK
+  android-workflow:
+    name: Build Android
     environment:
       flutter: stable
     scripts:
-      - flutter clean
-      - flutter pub get
-      - flutter build apk --release
+      - name: Get dependencies
+        script: flutter pub get
+      - name: Build .apk
+        script: flutter build apk --release
     artifacts:
-      - build/app/outputs/flutter-apk/
+      - build/app/outputs/flutter-apk/app-release.apk
