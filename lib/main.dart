@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'pages/login_page.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
-     flutter build apk --release
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -11,12 +15,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'CHINA DEALS',
-      home: Scaffold(
-        appBar: AppBar(title: const Text('CHINA DEALS')),
-        body: const Center(child: Text('Bienvenue')),
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.red,
       ),
+      home: const LoginPage(),
     );
   }
 }
-
- 
