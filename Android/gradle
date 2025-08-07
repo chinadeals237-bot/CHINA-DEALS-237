@@ -1,6 +1,0 @@
-include ':app'
-rootProject.name = 'china_deals'buildscript {
-    ext.kotlin_version = '1.9.10'
-    repositories {
-        google()
-        mavenCentral()
